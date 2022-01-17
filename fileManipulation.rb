@@ -4,4 +4,10 @@ class FileManipulation
         IO.readlines(pathToFile)[lineNumber]
     end
 
+    begin
+        file = open("games.log")
+    rescue => exception
+        puts "#{$!.class}: #{$!.message}"
+    end
+
 end
