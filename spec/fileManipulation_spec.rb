@@ -8,15 +8,12 @@ describe FileManipulation do
         end
     end
 
-
     describe "#open_file" do 
         it "test if the file can be opened and exists" do
             file = FileManipulation.new()
             expect(file.open_file("games.log").closed?).to eql(false)
         end
     end
-
-
 end
 
 
