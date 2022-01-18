@@ -1,7 +1,11 @@
 class FileManipulation
 
-    def printEspecificLine(lineNumber, pathToFile)
-        IO.readlines(pathToFile)[lineNumber]
+    def print_especific_line(line_number, path_to_file)
+        IO.readlines(path_to_file)[line_number]
+    end
+
+    def open_file(path_to_file)
+        File.open(path_to_file)
     end
 
     begin
