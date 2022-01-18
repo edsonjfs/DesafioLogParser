@@ -1,4 +1,4 @@
 require_relative  "fileManipulation"
 
-printLine = FileManipulation.new().printEspecificLine(1,"games.log")
-puts printLine
+print_line = FileManipulation.new().printEspecificLine(1,"games.log")
+puts print_line
