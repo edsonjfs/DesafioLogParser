@@ -11,8 +11,8 @@ class FileManipulation
     end
   end
 
-  def read_especific_line(line_number)
-    IO.readlines(@path_to_file)[line_number]
+  def return_first_line
+    IO.readlines(@path_to_file)[0]
   end
 
   def exists?
