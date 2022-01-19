@@ -1,4 +1,4 @@
 source 'https://rubygems.org'
 
 gem 'json'
-gem 'rspec', :require => 'spec'
+gem 'rspec'
