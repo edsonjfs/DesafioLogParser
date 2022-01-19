@@ -38,14 +38,31 @@ Finally set the Ruby version :
 
     $ rbenv global 3.1.0
 
-## Install RSpec
+## Install RSpec and Bundler
 
-To run the tests you will need **RSpec**
+To run the tests you will need **RSpec** and you are going to use **Bundler** to specify your dependencies in a Gemfile
 
-To install **RSpec** run in the terminal :
+To install **Bundler** run in the terminal :
 
-    gem install rspec
+    $ gem install bundler
+
+ Specify your dependencies in a Gemfile in your project's root: 
+
+    $ source 'https://rubygems.org'
+    $ gem 'rspec', :require => 'spec'
+
+ Install all of the required gems from your specified sources: 
+
+    bundle install
+
 
 to run the tests cd into the project files and run in the terminal:
 
     $ rspec
+
+#Run the aplication
+
+To run the aplication cd into the project file and run:
+
+    $ ruby main.rb
+    

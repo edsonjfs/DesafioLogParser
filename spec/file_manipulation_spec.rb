@@ -10,14 +10,14 @@ require_relative "../lib/file_manipulation"
     
     describe "#print_especific_line" do
         it "print specific line from a false log file" do
-          printed_line = FileManipulation.new("false_log.log").read_especific_line(1)
+          printed_line = FileManipulation.new("games.log").read_especific_line(1)
           expect(printed_line).to eql(nil)
         end
       end
 
   describe "#open_file" do 
     it "test if the file can be opened and exists" do
-      file = FileManipulation.new("games.log").exists
+      file = FileManipulation.new("games.log").exists?
       expect(file).to eql(true)
     end
   end

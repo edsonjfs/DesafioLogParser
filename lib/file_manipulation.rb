@@ -2,7 +2,6 @@ class FileManipulation
   
   def initialize(path_to_file)
     @path_to_file = path_to_file
-    @file = File.open(path_to_file)
     
     begin
       file = open(@path_to_file)
@@ -16,7 +15,7 @@ class FileManipulation
     IO.readlines(@path_to_file)[line_number]
   end
 
-  def exists
+  def exists?
     File.exists?(@path_to_file)
   end
 end
