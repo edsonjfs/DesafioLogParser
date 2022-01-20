@@ -1,4 +1,5 @@
 source 'https://rubygems.org'
 
-gem 'json'
+ruby '3.1.0'
+
 gem 'rspec'

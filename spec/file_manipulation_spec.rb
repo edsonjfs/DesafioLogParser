@@ -10,7 +10,7 @@ require_relative "../lib/file_manipulation"
 
   describe "#invalid_path" do 
     it "tests if the file does exists" do
-      expect{FileManipulation.new("invalid_path_file")}.to raise_error(RuntimeError)
+      expect{FileManipulation.new("invalid_path_file")}.to raise_error(Errno::ENOENT)
     end
   end
 end
