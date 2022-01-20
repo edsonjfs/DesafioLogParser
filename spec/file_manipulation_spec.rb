@@ -8,7 +8,7 @@ require_relative "../lib/file_manipulation"
       end
     end
 
-  describe "#invalid_path" do 
+  describe "#initialize" do 
     it "tests if the file does exists" do
       expect{FileManipulation.new("invalid_path_file")}.to raise_error(Errno::ENOENT)
     end
