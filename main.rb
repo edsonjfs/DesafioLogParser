@@ -1,4 +1,5 @@
-require_relative  "lib/file_manipulation.rb"
+require_relative 'lib/file_manipulation.rb'
 
-file = FileManipulation.new("games.log")
+file = FileManipulation.new('games.log')
 puts file.first_line
+puts file.info_log_to_json
