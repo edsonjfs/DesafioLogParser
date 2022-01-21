@@ -1,3 +1,4 @@
+require_relative 'players_log'
 require 'json'
 
 class FileManipulation 
@@ -12,7 +13,8 @@ class FileManipulation
   end
 
   def info_log_to_json
-    hash = { @path_to_file => { 'lines' => number_of_lines } }
+    players = PlayersLog.new(@path_to_file)
+    hash = { @path_to_file => { 'lines' => number_of_lines, 'players' => players.players_names } }
     hash.to_json
   end
 
