@@ -1,7 +1,7 @@
 require_relative 'players_log'
 require 'json'
 
-class FileManipulation 
+class FileManipulation
   def initialize(path_to_file)
     @path_to_file = path_to_file
     file = File.open(@path_to_file)
