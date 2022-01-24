@@ -1,4 +1,4 @@
-require_relative 'lib/file_manipulation.rb'
+require_relative 'lib/file_manipulation'
 
 file = FileManipulation.new('games.log')
 puts file.first_line

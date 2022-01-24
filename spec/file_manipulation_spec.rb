@@ -17,7 +17,7 @@ describe FileManipulation do
   describe '#info_log_to_json' do
     it 'tests if the method is returning correctly the JSON object' do
       file = FileManipulation.new('false_games.log')
-      json = { 'false_games.log' => { 'lines' => 1 } }.to_json
+      json = { 'false_games.log' => { 'lines' => 3, 'players' => ['Isgalamido'] } }.to_json
       expect(file.info_log_to_json).to eql(json)
     end
   end
