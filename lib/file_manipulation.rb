@@ -12,7 +12,7 @@ class FileManipulation
   end
 
   def info_log_to_json
-    hash = { @path_to_file => { 'lines' => number_of_lines, 'players' => players_names } }
+    hash = { @path_to_file => { 'lines' => number_of_lines, 'players' => players_names, 'kills' => players_kills, 'total_kills' => total_kills } }
     hash.to_json
   end
 
@@ -32,5 +32,43 @@ class FileManipulation
       end
     end
     all_players
+  end
+
+  def players_kills
+    players = players_names
+    kills_occurrences = []
+    suicide_kills = []
+    kill_count = {}
+    File.readlines(@path_to_file).each do |line|
+      players.each do |player|
+        if line.include?("#{player} killed")
+          unless line.include?("#{player} killed #{player}")
+            kills_occurrences.push(player)
+          end
+        end
+        if line.include?("#{player} killed #{player}")
+          suicide_kills.push(player)
+        end
+      end
+    end
+    players.each do |player|
+      kills = kills_occurrences.count { |player_name| player_name == player }
+      suicides = suicide_kills.count(player)
+      kill_count[player] = kills - suicides
+    end
+    kill_count
+  end
+
+  def total_kills
+    players = players_names
+    kills_occurrences = []
+    File.readlines(@path_to_file).each do |line|
+      players.each do |player|
+        if line.include?("#{player} killed")
+          kills_occurrences.push(player)
+        end
+      end
+    end
+    kills_occurrences.count
   end
 end
