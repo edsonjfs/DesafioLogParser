@@ -18,10 +18,6 @@ class FileManipulation
 
   private
 
-  def number_of_lines
-    File.readlines(@path_to_file).size
-  end
-
   def players_names
     all_players = []
     File.readlines(@path_to_file).each do |line|
@@ -39,23 +35,15 @@ class FileManipulation
     kills_occurrences = []
     suicide_kills = []
     kill_count = {}
+
     File.readlines(@path_to_file).each do |line|
       players.each do |player|
-        if line.include?("#{player} killed")
-          unless line.include?("#{player} killed #{player}")
-            kills_occurrences.push(player)
-          end
-        end
-        if line.include?("#{player} killed #{player}")
-          suicide_kills.push(player)
-        end
+        add_kill_occurence(kills_occurrences, player, line) if line.include?("#{player} killed")
+        suicide_kills.push(player) if line.include?("#{player} killed #{player}")
       end
     end
-    players.each do |player|
-      kills = kills_occurrences.count { |player_name| player_name == player }
-      suicides = suicide_kills.count(player)
-      kill_count[player] = kills - suicides
-    end
+
+    kill_counter(players, kills_occurrences, suicide_kills, kill_count)
     kill_count
   end
 
@@ -64,11 +52,25 @@ class FileManipulation
     kills_occurrences = []
     File.readlines(@path_to_file).each do |line|
       players.each do |player|
-        if line.include?("#{player} killed")
-          kills_occurrences.push(player)
-        end
+        kills_occurrences.push(player) if line.include?("#{player} killed")
       end
     end
     kills_occurrences.count
+  end
+
+  def add_kill_occurence(kills_occurrences, player, line)
+    kills_occurrences.push(player) unless line.include?("#{player} killed #{player}")
+  end
+
+  def kill_counter(players, kills_occurrences, suicide_kills, kill_count)
+    players.each do |player|
+      kills = kills_occurrences.count { |player_name| player_name == player }
+      suicides = suicide_kills.count(player)
+      kill_count[player] = kills - suicides
+    end
+  end
+
+  def number_of_lines
+    File.readlines(@path_to_file).size
   end
 end
