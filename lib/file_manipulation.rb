@@ -12,18 +12,22 @@ class FileManipulation
   end
 
   def info_log_to_json
-    hash = { @path_to_file => { 'lines' => number_of_lines, 'players' => players_names } }
+    hash = {
+      @path_to_file => {
+        'lines' => number_of_lines,
+        'players' => players_names,
+        'kills' => players_kills,
+        'total_kills' => total_kills
+      }
+    }
     hash.to_json
   end
 
   private
 
-  def number_of_lines
-    File.readlines(@path_to_file).size
-  end
-
   def players_names
     all_players = []
+
     File.readlines(@path_to_file).each do |line|
       if line.include?('ClientUserinfoChanged:')
         splited_line_with_name_in_position_one = line.split(/[\\\\]/)
@@ -31,6 +35,53 @@ class FileManipulation
         all_players.push(player_name) unless all_players.include?(player_name)
       end
     end
+
     all_players
+  end
+
+  def players_kills
+    players = players_names
+    kills_occurrences = []
+    suicide_kills = []
+    kill_count = {}
+
+    File.readlines(@path_to_file).each do |line|
+      players.each do |player|
+        add_kill_occurence(kills_occurrences, player, line) if line.include?("#{player} killed")
+        suicide_kills.push(player) if line.include?("#{player} killed #{player}")
+      end
+    end
+
+    kill_counter(players, kills_occurrences, suicide_kills, kill_count)
+    kill_count
+  end
+
+  def total_kills
+    players = players_names
+    kills_occurrences = []
+
+    File.readlines(@path_to_file).each do |line|
+      players.each do |player|
+        kills_occurrences.push(player) if line.include?("#{player} killed")
+      end
+    end
+
+    kills_occurrences.count
+  end
+
+  def add_kill_occurence(kills_occurrences, player, line)
+    kills_occurrences.push(player) unless line.include?("#{player} killed #{player}")
+  end
+
+  def kill_counter(players, kills_occurrences, suicide_kills, kill_count)
+    players.each do |player|
+      kills = kills_occurrences.count { |player_name| player_name == player }
+      suicides = suicide_kills.count(player)
+      kill_count[player] = kills - suicides
+    end
+  end
+
+  def number_of_lines
+    File.readlines(@path_to_file).size
   end
 end
