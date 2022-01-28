@@ -19,10 +19,10 @@ describe FileManipulation do
       file = FileManipulation.new('false_games.log')
       json = {
         'false_games.log' => {
-          'lines' => 11,
-          'players' => ['Isgalamido', 'Dono da Bola', 'Assasinu Credi'],
-          'kills' => { 'Isgalamido' => -1, 'Dono da Bola' => 1, 'Assasinu Credi' => 0 },
-          'total_kills' => 6
+          'lines' => 15,
+          'players' => ['Isgalamido', 'Dono da Bola', 'Assasinu Credi', 'Zeh'],
+          'kills' => { 'Isgalamido' => -1, 'Dono da Bola' => 1, 'Assasinu Credi' => 0, 'Zeh' => -1 },
+          'total_kills' => 9
         }
       }.to_json
       expect(file.info_log_to_json).to eql(json)
