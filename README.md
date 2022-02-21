@@ -7,7 +7,7 @@ There are automated tests for the methods using RSpec.
 
 This Project requires **Ruby 3.1.0**, and **RSpec**
 
-##Install Ruby 3.1.0:
+## Install Ruby 3.1.0:
 
 Before we can install Ruby, we need to install some base packages:
 
